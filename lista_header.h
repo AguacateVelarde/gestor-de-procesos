@@ -21,14 +21,21 @@ class Lista{
     NodoL* getRoot( void );
 
     void show( void );
+    int size( void );
+
+    std::vector<Proceso> group( std::string, std::string, std::vector<Proceso> );
+    std::vector<Proceso> getToVector( Lista );
 
 
+    NodoL* search( Proceso );
 
   private:
     NodoL* root;
 
     NodoL* search( std::string ); // Busca con el nombre
     NodoL* search( int ); // Busca con el PID
-    NodoL* search( Proceso );
+
+
+    NodoL* searchBefore( Proceso );
 
 };

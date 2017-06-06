@@ -1,15 +1,16 @@
 #include "proceso_header.h"
 
-Proceso::Proceso( ): Proceso( -1, 0, 0 ){ }
+Proceso::Proceso( ): Proceso( -1, 0, 0, "" ){ }
 
-Proceso::Proceso( int PID, int arrival, int time ){
+Proceso::Proceso( int PID, int arrival, int time, std::string name ){
   this -> PID = PID;
-  name = "";
+  this -> name = name;
   priority = 0;
   father = NULL;
   user = "";
   this -> arrival = arrival;
   this -> time = time;
+  this -> time_cont = time;
 }
 
 void Proceso::setPID( int PID ){ this -> PID = PID; }
@@ -27,6 +28,7 @@ Proceso* Proceso::getFather(  ){return father;}
 std::string Proceso::getUser(  ){return user;}
 int Proceso::getTime( ){ return time; }
 int Proceso::getArrival( ){ return arrival;}
+void Proceso::minusTime( ){ time_cont--; }
 
 bool Proceso::operator!=( Proceso data ){
   return this -> getPID( ) != data.getPID();
@@ -40,3 +42,29 @@ std::ostream& operator<<(std::ostream& os, Proceso& obj){
 void Proceso::show( ){
   std::cout << this -> getPID() << " "<< this -> getName() << " "<< this -> getArrival() << " "<< this -> getTime() << " "<<this -> getPriority() << " "<< this -> getFather() << " " << this -> getUser() << std::endl;
 }
+
+ bool ascendentePID( const Proceso& lhs, const Proceso& rhs ){
+   return lhs.PID < rhs.PID ;
+ }
+ bool ascendentePriority( const Proceso& lhs, const Proceso& rhs ){
+   return lhs.priority < rhs.priority ;
+ }
+ bool ascendenteArrival( const Proceso& lhs, const Proceso& rhs ){
+   return lhs.arrival < rhs.arrival ;
+ }
+ bool ascendenteTime( const Proceso& lhs, const Proceso& rhs ){
+   return lhs.time < rhs.time ;
+ }
+
+ bool descendentePID( const Proceso& lhs, const Proceso& rhs ){
+   return lhs.PID > rhs.PID ;
+ }
+ bool descendentePriority( const Proceso& lhs, const Proceso& rhs ){
+   return lhs.priority > rhs.priority ;
+ }
+ bool descendenteArrival( const Proceso& lhs, const Proceso& rhs ){
+   return lhs.arrival > rhs.arrival ;
+ }
+ bool descendenteTime( const Proceso& lhs, const Proceso& rhs ){
+   return lhs.time > rhs.time ;
+ }

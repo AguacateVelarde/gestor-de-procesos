@@ -9,10 +9,11 @@ class Proceso{
     std::string user;
     int arrival;
     int time;
+    int time_cont;
 
   public:
     Proceso( void );
-    Proceso( int, int, int );
+    Proceso( int, int, int, std::string );
     void setPID( int );
     void setName( std::string );
     void setPriority( int );
@@ -33,5 +34,15 @@ class Proceso{
     bool operator!=( Proceso );
     friend std::ostream& operator<<(std::ostream& ,  Proceso&);
     void show( void );
+    void minusTime( void ); //Reduce la tiempo cada ciclo
 
+    friend bool ascendentePID( const Proceso&, const Proceso& );
+    friend bool ascendentePriority( const Proceso&, const Proceso& );
+    friend bool ascendenteArrival( const Proceso&, const Proceso& );
+    friend bool ascendenteTime( const Proceso&, const Proceso& );
+
+    friend bool descendentePID( const Proceso&, const Proceso& );
+    friend bool descendentePriority( const Proceso&, const Proceso& );
+    friend bool descendenteArrival( const Proceso&, const Proceso& );
+    friend bool descendenteTime( const Proceso&, const Proceso& );
 };
